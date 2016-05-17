@@ -22,6 +22,20 @@ section {
    padding: 5px 5px 5px 5px;
  }
 
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 500px;
+  width: 500px;
+  background-color: gray;
+  border: 5px;
+  text-align: center;
+  margin: auto;
+  // padding: 250px 5px;
+
+}
+
 // Place all the styles related to the welcome controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
