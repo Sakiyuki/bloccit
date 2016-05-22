@@ -41,7 +41,7 @@ class PostsController < ApplicationController
       flash[:notice] = "Post was updated successfully."
       redirect_to @post
     else
-      flash.now[:alert] = "Ther was an error saving the post. Pleas try again."
+      flash.now[:alert] = "There was an error saving the post. Pleas try again."
       render :edit
     end
   end
