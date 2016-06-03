@@ -5,6 +5,7 @@ class TopicsController < ApplicationController
 
     def show
       @topic = Topic.find(params[:id])
+      # @sponsored_post = Sponsored_post.new
     end
 
     def new
@@ -16,6 +17,7 @@ class TopicsController < ApplicationController
      @topic.name = params[:topic][:name]
      @topic.description = params[:topic][:description]
      @topic.public = params[:topic][:public]
+    #  @sponsored_post.
 
      if @topic.save
        flash[:notice] = "Topic was saved successfully."

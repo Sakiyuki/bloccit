@@ -1,16 +1,16 @@
 # == Schema Information
 #
-# Table name: posts
+# Table name: sponsored_posts
 #
 #  id         :integer          not null, primary key
 #  title      :string
 #  body       :text
+#  price      :integer
+#  topic_id   :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  topic_id   :integer
 #
 
-class Post < ActiveRecord::Base
+class SponsoredPost < ActiveRecord::Base
   belongs_to :topic
-  has_many :comments, dependent: :destroy
 end

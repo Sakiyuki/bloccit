@@ -1,34 +1,33 @@
 # == Schema Information
 #
-# Table name: posts
+# Table name: sponsored_posts
 #
 #  id         :integer          not null, primary key
 #  title      :string
 #  body       :text
+#  price      :integer
+#  topic_id   :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  topic_id   :integer
 #
 
 require 'rails_helper'
 
-RSpec.describe Post, type: :model do
+RSpec.describe SponsoredPost, type: :model do
   let(:name) { RandomData.random_sentence }
-  let(:description) { RandomData.random_paragraph }
+  let(:description) { RandomData.random_paragraph}
   let(:title) { RandomData.random_sentence }
   let(:body) { RandomData.random_paragraph }
+  let(:price) { rand(0..1000) }
 
-  # #3
   let(:topic) { Topic.create!(name: name, description: description) }
-  # #4
-  let(:post) { topic.posts.create!(title: title, body: body) }
+  let(:sponsored_post) {topic.sponsored_posts.create!( title: title, body: body, price: price) }
 
-  it { is_expected.to belong_to(:topic) }
+  it { is_expected.to belong_to(:topic)}
 
-  # #2
   describe "attributes" do
-    it "has title and body attributes" do
-      expect(post).to have_attributes(title: title, body: body)
+    it "has title body and price attributes" do
+      expect(sponsored_post).to have_attributes(title: title, body: body, price: price)
     end
   end
 end
