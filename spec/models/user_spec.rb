@@ -39,12 +39,22 @@ RSpec.describe User, type: :model do
     let(:user_with_invalid_name) { User.new(name: "", email: "user@bloccit.com") }
     let(:user_with_invalid_email) { User.new(name: "Bloccit User", email: "") }
 
-    it "should be an invalid user dut to blank name" do
+    it "should be an invalid user due to blank name" do
       expect(user_with_invalid_name).to_not be_valid
     end
 
     it "should be an invalid user due to blank email" do
       expect(user_with_invalid_email).to_not be_valid
     end
+  end
+
+  describe "upper case first and last name" do
+
+    let(:user_with_lower_names) { User.create!(name: "bryant caldwell", email: "user@bloccit.com", password: "password") }
+
+    it "should perform upcase correctly" do
+      expect(user_with_lower_names.name).to eq("Bryant Caldwell")
+    end
+
   end
 end
