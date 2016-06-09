@@ -2,8 +2,7 @@
 <div class="jumbotron">
   <h1>Bloccit</h1>
     <p>Bloccit is a resource for sharing links with your friend!</p>
-      <%= link_to "Sign In", new_session_path %>
-         <% if curren_user %>
+         <% if current_user %>
          <%= current_user.name %> - <%= link_to "Sign Out", session_path(current_user), method: :delete %>
        <% else %>
          <%= link_to "Sign In", new_session_path %> or

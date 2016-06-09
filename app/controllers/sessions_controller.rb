@@ -19,8 +19,8 @@ class SessionsController < ApplicationController
 
   def destroy
 # #3
-      destroy_session(current_user)
-      flash[:notice] = "You've been signe out, come back soon!"
-      redirect_to root_path
-    end
+    destroy_session(current_user)
+    flash[:notice] = "You've been signed out, come back soon!"
+    redirect_to root_path
   end
+end
