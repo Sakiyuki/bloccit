@@ -11,6 +11,12 @@
 #
 
 class User < ActiveRecord::Base
+  has_many :posts
+
+  # def posts
+    # Post.find(user: self.id)
+  # end
+
   # #2
   before_save { self.email = email.downcase if email.present? }
 
