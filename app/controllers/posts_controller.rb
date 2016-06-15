@@ -1,7 +1,10 @@
 class PostsController < ApplicationController
 
-  before_action :require_sign_in, except: :show
-  before_action :authorize_user, except: [:show, :new, :create]
+  before_action :require_sign_in, except: [:index, :show]
+
+  before_action :authorize_moderator, only: [:edit, :update]
+  before_action :authorize_admin, only: [:destroy]
+
   def show
     @post = Post.find(params[:id])
   end
@@ -67,11 +70,28 @@ class PostsController < ApplicationController
     params.require(:post).permit(:title, :body)
   end
 
-  def authorize_user
+  # admin              - new, create, edit, update, delete
+  # user w/ own post   - new, create, edit, update, delete
+  # mod not own post   - new, create, edit, update
+  # member             - new, create
+  # member not own post- nothing
+
+  def authorize_moderator
     post = Post.find(params[:id])
-    unless current_user == post.user || current_user.admin?
+
+    unless current_user.moderator? || current_user.admin? || current_user == post.user
       flash[:alert] = "You must be an admin or the owner to do that."
       redirect_to [post.topic, post]
     end
   end
+
+  def authorize_admin
+    post = Post.find(params[:id])
+
+    unless current_user.admin? || current_user == post.user
+      flash[:alert] = "You must be admin or the owner to do that."
+      redirect_to [post.topic, post]
+    end
+  end
+
 end
