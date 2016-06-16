@@ -13,6 +13,7 @@
 
 class User < ActiveRecord::Base
   has_many :posts
+  has_many :comments
 
   # def posts
     # Post.find(user: self.id)

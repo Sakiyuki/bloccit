@@ -19,6 +19,7 @@ RSpec.describe User, type: :model do
   # dict["name"]
   # "Bloccit User"
   it { is_expected.to have_many(:posts) }
+  it { is_expected.to have_many(:comments) }
 # Shoulda tests for name
   it { is_expected.to validate_presence_of(:name) }
   it { is_expected.to validate_length_of(:name).is_at_least(1) }
@@ -51,7 +52,6 @@ RSpec.describe User, type: :model do
     # it "responds to moderator?" do
     #   expect(user).to respond_to(:moderator?)
     # end
-  end
 
 # #3
     it "responds to member?" do
@@ -118,3 +118,4 @@ RSpec.describe User, type: :model do
       expect(user_with_invalid_email).to_not be_valid
     end
   end
+end
