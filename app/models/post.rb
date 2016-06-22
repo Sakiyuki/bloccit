@@ -19,7 +19,7 @@ class Post < ActiveRecord::Base
     # User.find(self.user_id)
   # end
 
-  has_many :comments, dependent: :destroy
+  has_many :comments, dependent: :destroy, as: :commentable
   has_many :labelings, as: :labelable
   has_many :labels, through: :labelings
 

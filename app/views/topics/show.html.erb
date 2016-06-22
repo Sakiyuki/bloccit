@@ -11,6 +11,14 @@
       <%= render partial: "labels/list", locals: { labels: @topic.labels } %>
       <br />
       <%= @topic.description %>
+      <div>
+        <h3>Comments</h3>
+        <%= render @topic.comments, commentable: @topic %>
+      </div>
+
+      <% if current_user %>
+        <%= render 'comments/form', comment: Comment.new, commentable: @topic %>
+      <% end %>
     </p>
 
  <!-- #10 -->
@@ -19,7 +27,7 @@
          <div class="media-body">
            <h4 class="media-heading">
              <%= link_to post.title, topic_post_path(@topic, post) %>
-             <%= render partial: "label/list", locals: { labels: post.labels } %>
+             <%= render partial: "labels/list", locals: { labels: post.labels } %>
            </h4>
            <small>
              submitted <%= time_ago_in_words(post.created_at) %> ago by <%= post.user.name %> <br>
