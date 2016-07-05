@@ -40,13 +40,17 @@
   <h2>Favorited Posts</h2>
      <% if @user.has_favorites? %>
         <% @favorites.each do |fav| %>
-          <h4><%= image_tag "#{@user.avatar_url(25)}" %>
-              <%= fav.post.title %>
-              <%= fav.post.points %>
-              <%= fav.post.comments.count %>
-
-          </h4>
-     <% end %>
+          <div>
+            <div class= "pull-left" style="margin-right: 10px">
+              <%= image_tag "#{@user.avatar_url(40)}"  %>
+            </div>
+            <div>
+                <h4><%= fav.post.title %></h4>
+                <%= fav.post.points %> Points,
+                <%= fav.post.comments.count %> Comments
+            </div>
+          </div>
+        <% end %>
 
      <% else %>
        <h2><%= "#{@user.name} has not favorited any posts yet"%></h2>
