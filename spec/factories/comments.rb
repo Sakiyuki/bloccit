@@ -1,24 +1,19 @@
 # == Schema Information
 #
-# Table name: posts
+# Table name: comments
 #
 #  id         :integer          not null, primary key
-#  title      :string
 #  body       :text
+#  post_id    :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  topic_id   :integer
 #  user_id    :integer
-#  rank       :float
 #
 
-# #17
 FactoryGirl.define do
-  factory :post do
-    title RandomData.random_sentence
+  factory :comment do
     body RandomData.random_paragraph
-    topic
+    post
     user
-    rank 0.0
   end
 end

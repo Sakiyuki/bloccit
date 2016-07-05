@@ -3,7 +3,7 @@
     <div class="media">
       <br />
 
-      <% avatar_url = @user.avatar_url(1218) %>
+      <% avatar_url = @user.avatar_url(128) %>
       <% if avatar_url %>
         <div class="media-left">
 
@@ -21,8 +21,33 @@
   </div>
 </div>
 
-<h2>Posts</h2>
-<%= render @user.posts %>
 
-<h2>Comments</h2>
-<%= render @user.comments %>
+<% if @user.has_posts? %>
+  <h2>Posts</h2>
+  <%= render @user.posts %>
+<% else %>
+  <h2><%= "#{@user.name} has not submitted any posts yet."%></h2>
+<% end %>
+
+<% if @user.has_comments? %>
+  <h2>Comments</h2>
+  <%= render @user.comments %>
+<% else %>
+  <h2><%= "#{@user.name} has not submitted any comments yet."%></h2>
+<% end %>
+
+
+  <h2>Favorited Posts</h2>
+     <% if @user.has_favorites? %>
+        <% @favorites.each do |fav| %>
+          <h4><%= image_tag "#{@user.avatar_url(25)}" %>
+              <%= fav.post.title %>
+              <%= fav.post.points %>
+              <%= fav.post.comments.count %>
+
+          </h4>
+     <% end %>
+
+     <% else %>
+       <h2><%= "#{@user.name} has not favorited any posts yet"%></h2>
+     <% end %>

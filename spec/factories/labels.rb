@@ -1,15 +1,15 @@
 # == Schema Information
 #
-# Table name: favorites
+# Table name: labels
 #
 #  id         :integer          not null, primary key
-#  user_id    :integer
-#  post_id    :integer
+#  name       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
-class Favorite < ActiveRecord::Base
-  belongs_to :user
-  belongs_to :post
+FactoryGirl.define do
+  factory :label do
+    name RandomData.random_sentence
+  end
 end

@@ -2,13 +2,12 @@
 #
 # Table name: comments
 #
-#  id               :integer          not null, primary key
-#  body             :text
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#  user_id          :integer
-#  commentable_id   :integer
-#  commentable_type :string
+#  id         :integer          not null, primary key
+#  body       :text
+#  post_id    :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  user_id    :integer
 #
 
 require 'rails_helper'
@@ -18,7 +17,7 @@ RSpec.describe Comment, type: :model do
   let(:topic) { create(:topic) }
   let(:user) { create(:user) }
   let(:post) { create(:post) }
-  let(:comment) { Comment.create!(body: 'Comment Body', post: post, user: user) }
+  let(:comment) { create(:comment, post: post, user: user) }
 
   it { is_expected.to belong_to(:post) }
   it { is_expected.to belong_to(:user) }
@@ -28,7 +27,7 @@ RSpec.describe Comment, type: :model do
 
   describe "attributes" do
     it "has a body attribute" do
-      expect(comment).to have_attributes(body: "Comment Body")
+      expect(comment).to have_attributes(post: post, user: user)
     end
   end
 
@@ -50,7 +49,6 @@ RSpec.describe Comment, type: :model do
         expect(FavoriteMailer).not_to receive(:new_comment)
 
         @another_comment.save!
-
       end
    end
 end

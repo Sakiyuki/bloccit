@@ -9,6 +9,7 @@
 #  updated_at :datetime         not null
 #  topic_id   :integer
 #  user_id    :integer
+#  rank       :float
 #
 
 require 'rails_helper'
