@@ -22,12 +22,16 @@
     <p><%= @post.body %></p>
     <div>
       <h3>Comments</h3>
-      <%= render @post.comments %>
+      <div class='js-comments'>
+        <%= render @post.comments %>
+      </div>
     </div>
 <!-- #19 -->
     <% if current_user %>
 <!-- #20 -->
-      <%= render 'comments/form', comment: Comment.new, post: @post %>
+      <div class='new-comment'>
+        <%= render 'comments/form', comment: Comment.new, post: @post %>
+      </div>
     <% end %>
   </div>
   <% if user_is_authorized_for_post?(@post) %>
@@ -48,6 +52,6 @@
     </h3>
     <% if current_user %>
         <%= render partial: 'favorites/favorite', locals: { post: @post} %>
-    <% end %>    
+    <% end %>
   </div>
 </div>

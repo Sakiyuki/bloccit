@@ -23,32 +23,36 @@ class CommentsController < ApplicationController
   def create
 # #11
     @post = Post.find(params[:post_id])
-     comment = @post.comments.new(comment_params)
-     comment.user = current_user
+    @comment = @post.comments.new(comment_params)
+    @comment.user = current_user
+    @new_comment = Comment.new
 
-     if comment.save
-       flash[:notice] = "Comment saved successfully."
+    if @comment.save
+      flash[:notice] = "Comment saved successfully."
 # #12
-       redirect_to [@post.topic, @post]
-     else
-       flash[:alert] = "Comment failed to save."
+    else
+      flash[:alert] = "Comment failed to save."
 # #13
-       redirect_to [@post.topic, @post]
-     end
     end
 
-    private
-# #14
-    def comment_params
-     params.require(:comment).permit(:body)
+    respond_to do |format|
+      format.html
+      format.js
     end
+  end
+
+  private
+# #14
+  def comment_params
+   params.require(:comment).permit(:body)
+  end
 
 # #16
-    def authorize_user
-      comment = Comment.find(params[:id])
-      unless current_user == comment.user || current_user.admin?
-        flash[:alert] = "You do not have permission to delete a comment."
-        redirect_to [comment.post.topic, comment.post]
-     end
+  def authorize_user
+    comment = Comment.find(params[:id])
+    unless current_user == comment.user || current_user.admin?
+      flash[:alert] = "You do not have permission to delete a comment."
+      redirect_to [comment.post.topic, comment.post]
     end
- end
+  end
+end
