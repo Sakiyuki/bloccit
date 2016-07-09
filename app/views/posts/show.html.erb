@@ -1,5 +1,7 @@
 <div>
-  <%= render partial: 'votes/voter', locals: { post: @post } %>
+  <div class="js-vote-<%= @post.id %>">
+    <%= render partial: 'votes/voter', locals: { post: @post } %>
+  </div>
   <h1>
     <%= @post.title %> <br>
     <small>

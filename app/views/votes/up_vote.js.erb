@@ -1,0 +1,5 @@
+<% if @vote.valid? %>
+  $('.js-vote-<%= @post.id %>').html("<%= escape_javascript(render partial: 'votes/voter', locals: { post: @post}) %>");
+<% else %>
+  $('.flash').append("<div class='alert alert-danger'><button type='button' class='close' data-sismiss='alert'>&times;</button><%= flash.now[:alert] %></div>");
+<% end %>
