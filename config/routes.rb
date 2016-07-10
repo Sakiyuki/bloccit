@@ -26,6 +26,8 @@ Rails.application.routes.draw do
       namespace :v1 do
         resources :users, only: [:index, :show]
         resources :topics, only: [:index, :show]
+        resources :comments, only: [:index, :show]
+        resources :posts, only: [:index, :show]
       end
     end
   # The priority is based upon order of creation: first created -> highest priority.
